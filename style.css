@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe5e5; /* Light red background */
+    color: #8b0000; /* Dark red text */
+}
+
+form {
+    background-color: #ffcccc; /* Lighter red form background */
+    border: 2px solid #ff0000; /* Bright red border */
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+label, select, input[type="submit"] {
+    font-size: 16px;
+    color: #8b0000;
+}
+
+select {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #ff0000; /* Bright red button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+h1 {
+    color: #8b0000; /* Dark red for the price message */
+    font-weight: bold;
+}

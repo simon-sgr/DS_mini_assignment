@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="eliven">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="submitted.html">
+        <label for="food">main:</label>
+
+        <select name="food" id="food">
+            <option selected value="-1">----SELECT----</option>
+            <option value="c">Several individual pieces of chicken</option>
+            <option value="6">6 piece bucket</option>
+            <option value="10">10 piece bucket</option>
+        </select>
+
+        <br />
+        <div id="Quantity" style="display: none;">
+            <label for="FQ">Quantity:</label>
+            <select id="FQ">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <br />
+        </div>
+
+        <label for="side">sides:</label>
+        <br />
+        <select name="side" id="side" multiple>
+            <option value="p">Pepsi</option>
+            <option value="co">Corn</option>
+            <option value="g">Gravy</option>
+        </select>
+
+        <h1 id="cost">Please select a Food</h1>
+
+        <input type="submit" />
+    </form>
+    <script>
+        let price = {};
+        price["p"] = 2;
+        price["co"] = 3;
+        price["g"] = 4;
+        price["c"] = 5;
+        price["6"] = 6;
+        price["10"] = 7;
+
+        document.getElementById('food').addEventListener('change', function () {
+            var inputField = document.getElementById('Quantity');
+            if (this.value == 'c') {
+                inputField.style.display = 'block';
+            } else {
+                inputField.style.display = 'none';
+            }
+            updatePrice();
+        });
+
+        document.getElementById("side").addEventListener('change', function () {
+            updatePrice();
+        });
+
+        document.getElementById("FQ").addEventListener('change', function () {
+            updatePrice();
+        });
+
+        function updatePrice() {
+            var cost = document.getElementById('cost');
+            var selectFood = document.getElementById("food");
+            var selectSide = document.getElementById("side");
+            var Quantity = document.getElementById("FQ");
+
+            if (selectFood.value == -1) {
+                cost.innerText = 'Please select a Food';
+                return;
+            }
+
+            var priceCost = 0;
+            var foodPrice = price[selectFood.value] ?? 0;
+            if (selectFood.value == 'c') {
+                foodPrice *= document.getElementById("FQ").value;
+            }
+
+            priceCost += foodPrice;
+
+            for (var i = 0; i < selectSide.options.length; i++) {
+                if (selectSide.options[i].selected) {
+                    priceCost += price[selectSide.options[i].value]
+                }
+            }
+
+            cost.innerText = priceCost;
+        }
+    </script>
+</body>
+
+</html>
