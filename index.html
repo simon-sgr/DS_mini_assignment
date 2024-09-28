@@ -14,9 +14,9 @@
 
         <select name="food" id="food">
             <option selected value="-1">----SELECT----</option>
-            <option value="c">Several individual pieces of chicken</option>
-            <option value="6">6 piece bucket</option>
-            <option value="10">10 piece bucket</option>
+            <option value="chicken">Several individual pieces of chicken</option>
+            <option value="6piece">6 piece bucket</option>
+            <option value="10piece">10 piece bucket</option>
         </select>
 
         <br />
@@ -40,9 +40,9 @@
         <label for="side">sides:</label>
         <br />
         <select name="side" id="side" multiple>
-            <option value="p">Pepsi</option>
-            <option value="co">Corn</option>
-            <option value="g">Gravy</option>
+            <option value="pepsi">Pepsi</option>
+            <option value="corn">Corn</option>
+            <option value="gravy">Gravy</option>
         </select>
 
         <h1 id="cost">Please select a Food</h1>
@@ -51,16 +51,16 @@
     </form>
     <script>
         let price = {};
-        price["p"] = 2;
-        price["co"] = 3;
-        price["g"] = 4;
-        price["c"] = 5;
-        price["6"] = 6;
-        price["10"] = 7;
+        price["pepsi"] = 1.25;
+        price["corn"] = 1.8;
+        price["gravy"] = 1.5;
+        price["chicken"] = 1.50;
+        price["6piece"] = 8.1;
+        price["10piece"] = 12.75;
 
         document.getElementById('food').addEventListener('change', function () {
             var inputField = document.getElementById('Quantity');
-            if (this.value == 'c') {
+            if (this.value == 'chicken') {
                 inputField.style.display = 'block';
             } else {
                 inputField.style.display = 'none';
@@ -89,7 +89,7 @@
 
             var priceCost = 0;
             var foodPrice = price[selectFood.value] ?? 0;
-            if (selectFood.value == 'c') {
+            if (selectFood.value == 'chicken') {
                 foodPrice *= document.getElementById("FQ").value;
             }
 
@@ -101,7 +101,7 @@
                 }
             }
 
-            cost.innerText = priceCost;
+            cost.innerText = 'Price: ' + priceCost + ' €';
         }
     </script>
 </body>
