@@ -41,13 +41,56 @@ function updatePrice() {
         foodPrice *= document.getElementById("FQ").value;
     }
 
+    var sides = "";
     priceCost += foodPrice;
 
     for (var i = 0; i < selectSide.options.length; i++) {
         if (selectSide.options[i].selected) {
-            priceCost += price[selectSide.options[i].value]
+            priceCost += price[selectSide.options[i].value];
+            sides += selectSide.options[i];
         }
     }
 
-    cost.innerText = 'Price: ' + priceCost + ' €';
+    cost.innerText = getOrder() + '\nPrice: ' + priceCost + ' €';
 }
+
+function getOrder() {
+    const foodSelect = document.getElementById("food");
+    const quantitySelect = document.getElementById("FQ");
+    const sideSelect = document.getElementById("side");
+
+    const selectedFood = foodSelect.value !== "-1" ? foodSelect.options[foodSelect.selectedIndex].text : null;
+    const quantity = quantitySelect.value;
+    const selectedSides = Array.from(sideSelect.selectedOptions).map(option => option.text);
+
+    if (!selectedFood) {
+        alert("Please select a main food item.");
+        return;
+    }
+
+    let orderSummary = `Order Summary:\nMain: ${selectedFood}`;
+    
+    if (selectedFood && foodSelect.value == "chicken") {
+        orderSummary += `\nQuantity: ${quantity}`;
+    }
+
+    if (selectedSides.length > 0) {
+        orderSummary += `\nSides: ${selectedSides.join(", ")}`;
+    }
+
+    return orderSummary;
+}
+
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+    // Get form fields
+    const foodSelect = document.getElementById("food");
+    const quantityDiv = document.getElementById("Quantity");
+    const sideSelect = document.getElementById("side");
+
+    // Validate main food selection
+    if (foodSelect.value === "-1") {
+        alert("Please select a main food item.");
+        event.preventDefault(); // Prevent form submission
+        return;
+    }
+});
